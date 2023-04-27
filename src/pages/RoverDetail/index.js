@@ -10,7 +10,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -24,6 +24,7 @@ const RoverDetail = () => {
     const [message, setMessage] = useState('');
     const [open, setOpen] = useState(false);
     const param = useParams();
+
     const fetchUser = (date) => {
         setLoading(true);
         api
@@ -43,9 +44,9 @@ const RoverDetail = () => {
         if (reason === 'clickaway') {
             return;
         }
-
         setOpen(false);
     };
+
     useEffect(() => {
         // fetchUser();
         setRoverDetail(require('./../../rover-detail.json').photos)
@@ -54,16 +55,19 @@ const RoverDetail = () => {
     useEffect(() => {
         fetchUser(date)
     }, [date])
+
     return (
         <Box>
             <Box sx={{
                 display: 'flex',
                 flexWrap: 'wrap',
                 justifyContent: 'center',
+                marginTop: '30px',
+                width: '100%',
                 '& > :not(style)': {
-                    m: 2,
+                    // m: 2,
                     p: 2,
-                    width: 280,
+                    width: '44%'
                 }
             }}>
                 <Snackbar
@@ -72,12 +76,17 @@ const RoverDetail = () => {
                     onClose={handleClose}
                 >
                     <Alert severity="error">{message}</Alert>
-
                 </Snackbar>
+                <div className='backToHome'>
+                    <a href='/'><ArrowBackIcon /> back</a>
+                </div>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DatePicker onChange={(e) => setDate(moment(e).format('YYYY-MM-DD'))} defaultValue={new Date()} />
                 </LocalizationProvider>
             </Box>
+            <div className='TitleStyle'>
+                <h3>Mars Rover Detail View</h3>
+            </div>
             <Box
                 sx={{
                     display: 'flex',
@@ -91,7 +100,6 @@ const RoverDetail = () => {
                     }
                 }}
             >
-
                 {loading ?
                     <CircularProgress />
                     :
@@ -112,12 +120,17 @@ const RoverDetail = () => {
                                 src={item.img_src}
                             />
                         </div>
-                    </Paper>)) : "No data for selected date"
+                    </Paper>))
+                        :
+                        <div className='ErrorMsg'>
+                            <span>
+                                No data for selected date
+                            </span>
+                        </div>
                 }
-
             </Box>
         </Box>
-
     )
 }
+
 export default RoverDetail;

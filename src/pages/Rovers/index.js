@@ -26,45 +26,57 @@ const Rovers = () => {
     };
 
     useEffect(() => {
-        fetchUser();
+        // fetchUser();
+        setRovers(require('./../../rovers.json').rovers)
     }, []);
 
     return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                justifyContent: 'center',
-                '& > :not(style)': {
-                    m: 2,
-                    p: 2,
-                    width: 280,
-                    height: 220,
+        <>
+            <div className='TitleStyle'>
+                <h1>Mars Rover NASA’s List</h1>
+            </div>
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    justifyContent: 'center',
+                    marginTop: '30px',
+                    '& > :not(style)': {
+                        m: 2,
+                        p: 2,
+                        width: 280,
+                        height: 'auto',
+                        minHeight: 230
+                    }
+                }}
+            >
+                {loading ?
+                    <CircularProgress />
+                    :
+                    rovers?.length > 0 && rovers.map((item, i) => (<Paper
+                        key={i}
+                        sx={{
+                            cursor: 'pointer'
+                        }}
+                        elevation={3}
+                        onClick={() => navigate(`/rovers/${item.name}`)}
+                    >
+                        <div className='CardContent'>
+                            <div><b>Name:</b> {item?.name || ''}</div>
+                            <div><b>Landing date:</b> {item?.landing_date || ''}</div>
+                            <div><b>Launch date:</b> {item?.launch_date || ''}</div>
+                            <div><b>Total photos:</b> {item?.total_photos || ''}</div>
+                            <div><b>List of the cameras available:</b> {item.cameras?.length || ''}</div>
+                            {/* {item.cameras?.length > 0 && item.cameras.map((item, i) => (
+                            <div>
+                            {item.full_name || ''}
+                            </div>
+                        ))} */}
+                        </div>
+                    </Paper>))
                 }
-            }}
-        >
-            {loading ?
-                <CircularProgress />
-                :
-                rovers?.length > 0 && rovers.map((item, i) => (<Paper
-                    key={i}
-                    sx={{
-                        cursor: 'pointer'
-                    }}
-                    elevation={3}
-                    onClick={() => navigate(`/rovers/${item.name}`)}
-                >
-                    <div className='CardContent'>
-                        <div><b>Name:</b> {item?.name || ''}</div>
-                        <div><b>Landing date:</b> {item?.landing_date || ''}</div>
-                        <div><b>Launch date:</b> {item?.launch_date || ''}</div>
-                        <div><b>Total photos:</b> {item?.total_photos || ''}</div>
-                        <div><b>List of the cameras available:</b> {item.cameras?.length || ''}</div>
-                    </div>
-                </Paper>))
-            }
-
-        </Box>
+            </Box>
+        </>
     )
 }
 export default Rovers;
