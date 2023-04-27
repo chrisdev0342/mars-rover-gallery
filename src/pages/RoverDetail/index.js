@@ -95,7 +95,7 @@ const RoverDetail = () => {
                 {loading ?
                     <CircularProgress />
                     :
-                    roverDetail?.length > 0 && roverDetail.map((item, i) => (<Paper
+                    roverDetail?.length > 0 ? roverDetail.map((item, i) => (<Paper
                         key={i}
                         sx={{
                             cursor: 'pointer'
@@ -112,7 +112,7 @@ const RoverDetail = () => {
                                 src={item.img_src}
                             />
                         </div>
-                    </Paper>))
+                    </Paper>)) : "No data for selected date"
                 }
 
             </Box>
