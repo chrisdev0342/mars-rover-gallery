@@ -5,7 +5,12 @@
   justify-content: space-between;
 }
 
+.backToHome {
+  width: 10%;
+}
+
 .backToHome a {
+  margin: 20px 50px;
   display: flex;
   color: #000;
   text-decoration: none;

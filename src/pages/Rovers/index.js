@@ -4,6 +4,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Api from "./../../helper/api";
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Button from '@mui/material/Button';
 
 const Rovers = () => {
     const api = new Api();
@@ -44,9 +45,9 @@ const Rovers = () => {
                     '& > :not(style)': {
                         m: 2,
                         p: 2,
-                        width: 280,
+                        width: 310,
                         height: 'auto',
-                        minHeight: 230
+                        minHeight: 250
                     }
                 }}
             >
@@ -72,6 +73,10 @@ const Rovers = () => {
                             {item.full_name || ''}
                             </div>
                         ))} */}
+                            <div>
+                                <Button variant="outlined" size="small" color='secondary' sx={{ m: 1 }}>See Here Cameras</Button>
+                                <Button variant="outlined" size="small" sx={{ m: 1 }}>See Detail View</Button>
+                            </div>
                         </div>
                     </Paper>))
                 }

@@ -58,6 +58,12 @@ const RoverDetail = () => {
 
     return (
         <Box>
+            <div className='backToHome'>
+                <a href='/'><ArrowBackIcon /> back</a>
+            </div>
+            <div className='TitleStyle'>
+                <h3>Mars Rover Detail View</h3>
+            </div>
             <Box sx={{
                 display: 'flex',
                 flexWrap: 'wrap',
@@ -65,9 +71,9 @@ const RoverDetail = () => {
                 marginTop: '30px',
                 width: '100%',
                 '& > :not(style)': {
-                    // m: 2,
+                    m: 2,
                     p: 2,
-                    width: '44%'
+                    width: '40%'
                 }
             }}>
                 <Snackbar
@@ -77,16 +83,10 @@ const RoverDetail = () => {
                 >
                     <Alert severity="error">{message}</Alert>
                 </Snackbar>
-                <div className='backToHome'>
-                    <a href='/'><ArrowBackIcon /> back</a>
-                </div>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DatePicker onChange={(e) => setDate(moment(e).format('YYYY-MM-DD'))} defaultValue={new Date()} />
                 </LocalizationProvider>
             </Box>
-            <div className='TitleStyle'>
-                <h3>Mars Rover Detail View</h3>
-            </div>
             <Box
                 sx={{
                     display: 'flex',
