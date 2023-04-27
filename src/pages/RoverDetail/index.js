@@ -75,7 +75,7 @@ const RoverDetail = () => {
 
                 </Snackbar>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <DatePicker onChange={(e) => setDate(moment(e).format('YYYY-MM-DD'))} />
+                    <DatePicker onChange={(e) => setDate(moment(e).format('YYYY-MM-DD'))} defaultValue={new Date()} />
                 </LocalizationProvider>
             </Box>
             <Box
