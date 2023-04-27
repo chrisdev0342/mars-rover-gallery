@@ -2,18 +2,27 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import Api from "./../../helper/api";
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, forwardRef } from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+
+const Alert = forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const RoverDetail = () => {
     const api = new Api();
     const [roverDetail, setRoverDetail] = useState();
     const [loading, setLoading] = useState(false);
-    const [date, setDate] = useState(moment().format('YYYY-MM-DD'))
+    const [date, setDate] = useState(moment().format('YYYY-MM-DD'));
+    const [message, setMessage] = useState('');
+    const [open, setOpen] = useState(false);
     const param = useParams();
     const fetchUser = (date) => {
         setLoading(true);
@@ -25,10 +34,18 @@ const RoverDetail = () => {
             })
             .catch((err) => {
                 setLoading(false);
-                console.log(err)
+                setMessage(err?.response?.data?.error?.message || 'something went wrong')
+                setOpen(true);
             });
     };
 
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
     useEffect(() => {
         // fetchUser();
         setRoverDetail(require('./../../rover-detail.json').photos)
@@ -49,6 +66,14 @@ const RoverDetail = () => {
                     width: 280,
                 }
             }}>
+                <Snackbar
+                    open={open}
+                    autoHideDuration={6000}
+                    onClose={handleClose}
+                >
+                    <Alert severity="error">{message}</Alert>
+
+                </Snackbar>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DatePicker onChange={(e) => setDate(moment(e).format('YYYY-MM-DD'))} />
                 </LocalizationProvider>
