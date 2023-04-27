@@ -74,7 +74,7 @@ const Rovers = () => {
                             </div>
                         ))} */}
                             <div>
-                                <Button variant="outlined" size="small" color='secondary' sx={{ m: 1 }}>See Here Cameras</Button>
+                                {/* <Button variant="outlined" size="small" color='secondary' sx={{ m: 1 }}>See Here Cameras</Button> */}
                                 <Button variant="outlined" size="small" sx={{ m: 1 }}>See Detail View</Button>
                             </div>
                         </div>
