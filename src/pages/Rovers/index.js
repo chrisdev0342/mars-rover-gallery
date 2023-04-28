@@ -80,7 +80,7 @@ const Rovers = () => {
                             <div>
                                 {/* <Button variant="outlined" size="small" color='secondary' sx={{ m: 1 }}>See Here Cameras</Button> */}
                                 <Button onClick={() => navigate(`/rovers/${item.name}`)} variant="outlined" size="small" sx={{ m: 1 }}>See Detail View</Button>
-                                <Button onClick={() => { setOpenModal(true); setCameraDetail(item.cameras) }} variant="outlined" size="small" sx={{ m: 1 }}>Cameras</Button>
+                                <Button onClick={() => { setOpenModal(true); setCameraDetail(item.cameras) }} variant="outlined" color='secondary' size="small" sx={{ m: 1 }}>See Camera List</Button>
                             </div>
                         </div>
                     </Paper>))

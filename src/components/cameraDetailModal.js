@@ -3,13 +3,35 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography';
+import { styled } from '@mui/material/styles';
+import CloseIcon from '@mui/icons-material/Close';
 
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+        fontSize: 14,
+    },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+        border: 0,
+    },
+}));
 
 const style = {
     position: 'absolute',
@@ -22,19 +44,21 @@ const style = {
     maxHeight: 500,
     overflow: 'auto',
     bgcolor: 'background.paper',
-    border: '2px solid #000',
     boxShadow: 24,
     p: 4,
 };
 
 const titleStyle = {
     textAlign: 'center',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontSize: '2rem',
+    margin: '0 0 30px 0'
 }
 
 export default function CameraDetailModalp(props) {
     const { openModal, setOpenModal, cameraDetail } = props;
     const handleClose = () => setOpenModal(false);
+
     return (
         <div>
             <Modal
@@ -45,28 +69,28 @@ export default function CameraDetailModalp(props) {
             >
 
                 <Box sx={style}>
+                    <div className='DailogClose'>
+                        <CloseIcon onClick={handleClose} />
+                    </div>
+                    <Typography variant="h2" sx={titleStyle}>Camera Detail</Typography>
                     <TableContainer component={Paper}>
-                        <Typography variant="h5" sx={titleStyle}>Camera Detail</Typography>
-                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                        <Table sx={{ minWidth: 700 }} aria-label="customized table">
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>ID</TableCell>
-                                    <TableCell align="right">Name</TableCell>
-                                    <TableCell align="right">Full Name</TableCell>
+                                    <StyledTableCell>Sr.</StyledTableCell>
+                                    <StyledTableCell align="right">ID</StyledTableCell>
+                                    <StyledTableCell align="right">Name</StyledTableCell>
+                                    <StyledTableCell align="right">Full Name</StyledTableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {cameraDetail.length > 0 && cameraDetail.map((row) => (
-                                    <TableRow
-                                        key={row.name}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    >
-                                        <TableCell component="th" scope="row">
-                                            {row.id}
-                                        </TableCell>
-                                        <TableCell align="right">{row.name}</TableCell>
-                                        <TableCell align="right">{row.full_name}</TableCell>
-                                    </TableRow>
+                                {cameraDetail.length > 0 && cameraDetail.map((row, i) => (
+                                    <StyledTableRow key={row.name}>
+                                        <StyledTableCell component="th" scope="row">{i + 1}</StyledTableCell>
+                                        <StyledTableCell component="th" scope="row">{row.id}</StyledTableCell>
+                                        <StyledTableCell align="right">{row.name}</StyledTableCell>
+                                        <StyledTableCell align="right">{row.full_name}</StyledTableCell>
+                                    </StyledTableRow>
                                 ))}
                             </TableBody>
                         </Table>

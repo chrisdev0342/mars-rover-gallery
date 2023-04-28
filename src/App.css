@@ -7,6 +7,7 @@
 
 .backToHome {
   width: 10%;
+  cursor: pointer;
 }
 
 .backToHome a {
@@ -14,6 +15,11 @@
   display: flex;
   color: #000;
   text-decoration: none;
+}
+
+.DailogClose {
+  cursor: pointer;
+  position: fixed;
 }
 
 .TitleStyle {
