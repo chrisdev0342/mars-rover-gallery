@@ -60,7 +60,6 @@ const Rovers = () => {
                             cursor: 'pointer'
                         }}
                         elevation={3}
-                        onClick={() => navigate(`/rovers/${item.name}`)}
                     >
                         <div className='CardContent'>
                             <div><b>Name:</b> {item?.name || ''}</div>
@@ -75,7 +74,7 @@ const Rovers = () => {
                         ))} */}
                             <div>
                                 {/* <Button variant="outlined" size="small" color='secondary' sx={{ m: 1 }}>See Here Cameras</Button> */}
-                                <Button variant="outlined" size="small" sx={{ m: 1 }}>See Detail View</Button>
+                                <Button onClick={() => navigate(`/rovers/${item.name}`)} variant="outlined" size="small" sx={{ m: 1 }}>See Detail View</Button>
                             </div>
                         </div>
                     </Paper>))
