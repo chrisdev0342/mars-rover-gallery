@@ -11,6 +11,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Lightbox } from "react-modal-image";
 
 const Alert = forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -24,6 +25,7 @@ const RoverDetail = () => {
     const [message, setMessage] = useState('');
     const [open, setOpen] = useState(false);
     const param = useParams();
+    const [image, setImage] = useState('')
 
     const fetchUser = (date) => {
         setLoading(true);
@@ -55,7 +57,7 @@ const RoverDetail = () => {
     useEffect(() => {
         fetchUser(date)
     }, [date])
-
+    console.log(image)
     return (
         <Box>
             <div className='backToHome'>
@@ -64,6 +66,16 @@ const RoverDetail = () => {
             <div className='TitleStyle'>
                 <h3>Mars Rover Detail View</h3>
             </div>
+            {image && (
+                <Lightbox
+                    medium={image}
+                    large={image}
+                    alt=""
+                    onClose={()=>setImage('')}
+                    hideDownload
+                    hideZoom
+                />
+            )}
             <Box sx={{
                 display: 'flex',
                 flexWrap: 'wrap',
@@ -111,6 +123,7 @@ const RoverDetail = () => {
                         elevation={3}>
                         <div className='CardContent'>
                             <Box
+                                onClick={() => setImage(item.img_src)}
                                 component="img"
                                 sx={{
                                     height: '100%',
