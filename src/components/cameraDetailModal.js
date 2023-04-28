@@ -67,7 +67,6 @@ export default function CameraDetailModalp(props) {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-
                 <Box sx={style}>
                     <div className='DailogClose'>
                         <CloseIcon onClick={handleClose} />
@@ -78,7 +77,7 @@ export default function CameraDetailModalp(props) {
                             <TableHead>
                                 <TableRow>
                                     <StyledTableCell>Sr.</StyledTableCell>
-                                    <StyledTableCell align="right">ID</StyledTableCell>
+                                    <StyledTableCell align="center">ID</StyledTableCell>
                                     <StyledTableCell align="right">Name</StyledTableCell>
                                     <StyledTableCell align="right">Full Name</StyledTableCell>
                                 </TableRow>
@@ -87,7 +86,7 @@ export default function CameraDetailModalp(props) {
                                 {cameraDetail.length > 0 && cameraDetail.map((row, i) => (
                                     <StyledTableRow key={row.name}>
                                         <StyledTableCell component="th" scope="row">{i + 1}</StyledTableCell>
-                                        <StyledTableCell component="th" scope="row">{row.id}</StyledTableCell>
+                                        <StyledTableCell align='center'>{row.id}</StyledTableCell>
                                         <StyledTableCell align="right">{row.name}</StyledTableCell>
                                         <StyledTableCell align="right">{row.full_name}</StyledTableCell>
                                     </StyledTableRow>

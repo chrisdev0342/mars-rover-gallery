@@ -50,8 +50,7 @@ const RoverDetail = () => {
     };
 
     useEffect(() => {
-        // fetchUser();
-        setRoverDetail(require('./../../rover-detail.json').photos)
+        fetchUser();
     }, []);
 
     useEffect(() => {

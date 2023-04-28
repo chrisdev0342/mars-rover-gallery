@@ -31,8 +31,7 @@ const Rovers = () => {
     };
 
     useEffect(() => {
-        // fetchUser();
-        setRovers(require('./../../rovers.json').rovers)
+        fetchUser();
     }, []);
 
     return (
@@ -41,25 +40,35 @@ const Rovers = () => {
             <div className='TitleStyle'>
                 <h1>Mars Rover NASA’s List</h1>
             </div>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    justifyContent: 'center',
-                    marginTop: '30px',
-                    '& > :not(style)': {
-                        m: 2,
-                        p: 2,
-                        width: 310,
-                        height: 'auto',
-                        minHeight: 250
-                    }
-                }}
-            >
-                {loading ?
+            {loading ?
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'center',
+                        marginTop: '30px',
+                    }}
+                >
                     <CircularProgress />
-                    :
-                    rovers?.length > 0 && rovers.map((item, i) => (<Paper
+                </Box>
+                :
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'center',
+                        marginTop: '30px',
+                        '& > :not(style)': {
+                            m: 2,
+                            p: 2,
+                            width: 310,
+                            height: 'auto',
+                            minHeight: 250
+                        }
+                    }}
+                >
+
+                    {rovers?.length > 0 && rovers.map((item, i) => (<Paper
                         key={i}
                         sx={{
                             cursor: 'pointer'
@@ -72,20 +81,14 @@ const Rovers = () => {
                             <div><b>Launch date:</b> {item?.launch_date || ''}</div>
                             <div><b>Total photos:</b> {item?.total_photos || ''}</div>
                             <div><b>List of the cameras available:</b> {item.cameras?.length || ''}</div>
-                            {/* {item.cameras?.length > 0 && item.cameras.map((item, i) => (
                             <div>
-                            {item.full_name || ''}
-                            </div>
-                        ))} */}
-                            <div>
-                                {/* <Button variant="outlined" size="small" color='secondary' sx={{ m: 1 }}>See Here Cameras</Button> */}
                                 <Button onClick={() => navigate(`/rovers/${item.name}`)} variant="outlined" size="small" sx={{ m: 1 }}>See Detail View</Button>
                                 <Button onClick={() => { setOpenModal(true); setCameraDetail(item.cameras) }} variant="outlined" color='secondary' size="small" sx={{ m: 1 }}>See Camera List</Button>
                             </div>
                         </div>
-                    </Paper>))
-                }
-            </Box>
+                    </Paper>))}
+                </Box>
+            }
         </>
     )
 }
