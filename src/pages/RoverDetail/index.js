@@ -57,25 +57,25 @@ const RoverDetail = () => {
     useEffect(() => {
         fetchUser(date)
     }, [date])
-    console.log(image)
+
     return (
         <Box>
+            {image && (
+                <Lightbox
+                    medium={image}
+                    large={image}
+                    alt=""
+                    onClose={() => setImage('')}
+                    hideDownload
+                    hideZoom
+                />
+            )}
             <div className='backToHome'>
                 <a href='/'><ArrowBackIcon /> back</a>
             </div>
             <div className='TitleStyle'>
                 <h3>Mars Rover Detail View</h3>
             </div>
-            {image && (
-                <Lightbox
-                    medium={image}
-                    large={image}
-                    alt=""
-                    onClose={()=>setImage('')}
-                    hideDownload
-                    hideZoom
-                />
-            )}
             <Box sx={{
                 display: 'flex',
                 flexWrap: 'wrap',
